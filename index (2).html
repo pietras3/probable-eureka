@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wielkanocne Życzenia</title>
+    <style>
+        body {
+            background-color: #fff8e1;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #4caf50;
+            margin-top: 30px;
+        }
+
+        .zyczenia {
+            font-size: 20px;
+            color: #5d4037;
+            margin-top: 20px;
+        }
+
+        #zegar {
+            font-size: 18px;
+            margin-top: 30px;
+            color: #3e2723;
+        }
+
+        .kwiatek {
+            position: absolute;
+            color: pink;
+            font-size: 24px;
+            animation: spadanie linear infinite;
+        }
+
+        @keyframes spadanie {
+            0% { top: -50px; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .jajko {
+            margin-top: 20px;
+            width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Wesołych Świąt Wielkanocnych</h1>
+
+   <img src="jajko.png" alt="Jajko wielkanocne" class="jajko">
+
+    <div class="zyczenia">
+        Zdrowia, radości, mokrego dyngusa<br>
+        oraz dużo uśmiechu i wiosennego słońca.
+    </div>
+
+    <div id="zegar"></div>
+
+    <div id="kwiatki"></div>
+
+    <script>
+        // ZEGAR I DATOWNIK
+        function aktualizujZegar() {
+            const teraz = new Date();
+            const data = teraz.toLocaleDateString();
+            const czas = teraz.toLocaleTimeString();
+            document.getElementById('zegar').innerText = "Dziś jest: " + data + " | Godzina: " + czas;
+        }
+
+        setInterval(aktualizujZegar, 1000);
+        aktualizujZegar();
+
+        // SPADAJĄCE KWIATKI
+        function dodajKwiatek() {
+            const kwiatek = document.createElement("div");
+            kwiatek.className = "kwiatek";
+            kwiatek.innerText = "🌸";
+
+            kwiatek.style.left = Math.random() * window.innerWidth + "px";
+            kwiatek.style.animationDuration = (3 + Math.random() * 5) + "s";
+
+            document.body.appendChild(kwiatek);
+
+            setTimeout(() => {
+                document.body.removeChild(kwiatek);
+            }, 8000);
+        }
+
+        setInterval(dodajKwiatek, 500);
+    </script>
+</body>
+</html>
